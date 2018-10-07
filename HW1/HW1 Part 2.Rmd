@@ -1,0 +1,226 @@
+---
+title: "Optimization HW1"
+author: "Jill, Luca, Rush"
+date: "10/6/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exer 7
+
+For this problem, assume there are two coal mines that feed four power plants.  Mine #1 has 230 tons available, Mine #2 has 150 tons.  The plants need the following tons:
+
+Decision Variables
+Xij, total units going from mine j to plant j
+
+Minimize:
+Total Cost =
+65 x X11 + 40 x X12 + 30 x X13 + 15 x X14 + 
+10 x X21 + 35 x X22 + 40 x X23 + 60 x X24
+
+Subject To:
+X11 + X12 + X13 + X14 <= 230
+X11 + X12 + X13 + X14 >= 0
+X21 + X22 + X23 + X24 <= 150
+X21 + X22 + X23 + X24 >= 0
+X11 + X21 >= 80
+X12 + X22 >= 100
+X13 + X23 >= 70
+X14 + X24 >= 130
+
+Solved in Excel:
+X11 = 0
+X12 = 30
+X13 = 70
+X14 = 130
+X21 = 80
+X22 = 70
+X23 = 0
+X24 = 0
+Total Cost = 8500
+
+## Exer 8
+
+a. You need to determine what product should be slotted in which location.  Only one product can go in each location and each product can only be slotted once.
+
+Decision Variables
+Xij, boolean variable (0/1) represents if product i is in slot j
+
+Maximize Total Profit
+$\sum{X_{ij}P_{ij}}$, where Pij is the profit per product
+
+Subject To:
+Column Sum Xj <= 1
+Column Sum Xj >= 0
+Row Sum Xi <= 1
+Row Sum Xi >= 0
+
+Solved in Excel, see attachments.
+X14 = 1
+X210 = 1
+X34 = 1
+X43 = 1
+X56 = 1
+X61 = 1
+X72 = 1
+X87 = 1
+X98 = 1
+X109 = 1
+Total Profit = 284
+
+b. Once you have your model built, determine what the absolute worse slotting would be. What is the business value for calculating this?
+
+The absolute worse slotting is slot 1, which has the lowest profit and the minimum profit per product (12) is within this slot. The business value for calculating this slot can be used to better allocate the resource, so that we always put the product with the greatest profit within this worse slot.
+
+c. Also, determine the profit if each item was slotted in its best possible location - not considering the overall feasibility of the solution.  What does this number tell you from a business point of view?
+
+Profit = 336, sum of the maximum profit per item.
+
+## Exer 9
+
+a. Set up the model in Excel (you should at least try this in Excel and if you like try it in Python too) and solve with OpenSolver.
+
+Decision Variables 
+X1 - Number of American Planes
+X2 - Number of British Planes
+
+Maximize:
+30000 x X1 + 20000 x X2
+
+Subject to:
+2 x X1 + 1 x X2 <= 64
+2 x X1 + 1 x X2 >= 0
+9000 x 21 x X1 + 5000 x 21 x X2 <= 7000000
+9000 x 21 x X1 + 5000 x 21 x X2 >= 0
+X1 + X2 <= 44
+X1 + X2 >= 0
+
+Solved in Excel:
+
+X1 = 20
+X2 = 24
+Capacity = 1080000
+
+b. What if the budget was $5,000,000, what is the solution? What is wrong with the solution? What are at least two ways to resolve this problem?
+
+Decision Variables 
+X1 - Number of American Planes
+X2 - Number of British Planes
+
+Maximize:
+30000 x X1 + 20000 x X2
+
+Subject to:
+2 x X1 + 1 x X2 <= 64
+2 x X1 + 1 x X2 >= 0
+9000 x 21 x X1 + 5000 x 21 x X2 <= 5000000
+9000 x 21 x X1 + 5000 x 21 x X2 >= 0
+X1 + X2 <= 44
+X1 + X2 >= 0
+
+Solved in Excel:
+
+X1 = 4.5
+X2 = 39.5
+Capacity = 925238.10
+
+The solutions are not in the form of integer in this case.
+
+In order to resolve this issue, we can round up and down and compare the combinations of the floor and ceilings. The combination with the highest capacity within the constraints are the optimal solution.
+
+
+## Exer 10
+
+You are working for a distributor of vegetables. You can see the data on the vegetables in the spreadsheet. You have the price that you purchase, the price you sell, and the minimum quantity you have to sell (by contract), the max you can sell (the most the market will bear), and the cubic feet per carton. 
+Your warehouse only has room for 18,000 cubic feet of product. And, your supplier only allows you to purchase up to $30,000 of product per week.
+
+a.	Set this up and solve as a linear program.
+
+Decision Variables:
+X1, X2, X3, ..., X15, the quantity of each vegetable to purchase.
+
+Maximize
+Total Profit
+(2.27 - 2.15) x X1 +
+(2.48 - 2.20) x X2 +
+(2.70 - 2.40) x X3 +
+(5.20 - 4.80) x X4 +
+(2.92 - 2.60) x X5 +
+(2.48 - 2.30) x X6 +
+(2.20 - 2.35) x X7 +
+(3.13 - 2.85) x X8 +
+(2.48 - 2.25) x X9 +
+(2.27 - 2.10) x X10 +
+(3.13 - 2.80) x X11 +
+(3.18 - 3.00) x X12 +
+(2.92 - 2.60) x X13 +
+(2.70 - 2.50) x X14 +
+(3.13 - 2.90) x X15
+
+Subject to:
+1.25 x (X1 + X2 + X3 + X4 + X5 + X6 + X7 + X8 + X9 + X10 + X11 + X12 + X13 + X14) <= 18000
+1.25 x (X1 + X2 + X3 + X4 + X5 + X6 + X7 + X8 + X9 + X10 + X11 + X12 + X13 + X14) >= 0
+
+2.15 x X1 + 2.20 x X2 + 2.40 x X3 + 4.80 x X4 + 2.60 x X5 + 
+2.30 x X6 + 2.35 x X7 + 2.85 x X8 + 2.25 x X9 + 2.10 x X10 +
+2.80 x X11 + 3.00 x X12 + 2.60 x X13 + 2.50 x X14 + 2.90 x X15 <= 30000
+
+2.15 x X1 + 2.20 x X2 + 2.40 x X3 + 4.80 x X4 + 2.60 x X5 + 
+2.30 x X6 + 2.35 x X7 + 2.85 x X8 + 2.25 x X9 + 2.10 x X10 +
+2.80 x X11 + 3.00 x X12 + 2.60 x X13 + 2.50 x X14 + 2.90 x X15 >= 0
+
+X1 <= 300
+X2 <= 400
+X3 <= 250
+X4 <= 0
+X5 <= 300
+X6 <= 200
+X7 <= 150
+X8 <= 100
+X9 <= 750
+X10 <= 400
+X11 <= 500
+X12 <= 100
+X13 <= 500
+X14 <= 100
+X15 <= 400
+
+X1 >= 1500
+X2 >= 2000
+X3 >= 900
+X4 >= 150
+X5 >= 1200
+X6 >= 800
+X7 >= 600
+X8 >= 300
+X9 >= 3500
+X10 >= 2000
+X11 >= 3300
+X12 >= 500
+X13 >= 3200
+X14 >= 500
+X15 >= 2500
+
+Solved in Excel:
+X1 = 300
+X2 = 2000
+X3 = 900
+X4 = 0
+X5 = 1200
+X6 = 200
+X7 = 150
+X8 = 100
+X9 = 750
+X10 = 400
+X11 = 2150
+X12 = 100
+X13 = 3200
+X14 = 100
+X15 = 400
+Profit = $3,395.50 
+
+b.	What insights do you get from the solution.
+The higher the unit profit the vegetable has, the greater quantity we should buy.

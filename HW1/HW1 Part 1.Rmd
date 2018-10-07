@@ -1,0 +1,238 @@
+---
+title: "Optimization HW1"
+author: "Jill, Luca, Rush"
+date: "10/6/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exer 1
+
+If X, Y, and Z are decision variables, which of the following relationships are valid in a linear program. Briefly explain why for each of your answers.
+a.	X + Y = Z
+Can form a linear program.
+
+b.	XY <= 100
+Can't form a linear program. In a linear program, the constraint should be the sum of multiplicates of decision variables. However, in the equation above, the product of two decision variable is defined. 
+
+c.	3X + 2Y <= $\sqrt{5}$
+Can form a linear program.
+
+d.	$\sqrt{5}$X + 2Y = 50
+Can form a linear program.
+
+e.	$\sqrt{5X}$  + 10Y = 100
+Can't form a linear program. The decision variable X should not be taken the square root.
+
+f.	$X^2$ + $Y^2$ >= 45
+Can't form a linear program. We need the sum of the multiplicates of decision variables instead of the sum of squares.
+
+## Exer 2
+
+a. Formulate and solve the “Two Products – Three Machine” problem from Class #1 as a linear program.
+
+Decision Variables:
+A, B
+
+Maximize:
+470 x A + 420 x B - 50000
+
+Subject to:
+A >= 75
+A <= 140
+B >= 0
+B <= 140
+2 x A <= 336
+2.5 x B <= 336
+2 x A + 1.5 x B <= 336
+
+Solved in Excel:
+A = 75
+B = 124
+
+Profit = 37330
+
+M1 = 150
+M2 = 310
+M3 = 336
+
+b. Also, how would you set up this model so you could scale it?  That is, how would you structure it if you had a lot of machines and a lot of products?
+
+As the cost of B in machine 3 is lower than A, we should try the best use of machine 3 in production.
+
+## Exer 3
+
+a. Your non-vegetarian friend wants to determine how many units of different kinds of meat he should eat to get the right amounts of vitamins A, C, B1, and B2 over the week.  He also wants to minimize his cost.  What should his diet be?
+
+Decision Variables:
+B, C, F, H, M, T
+
+Minimize:
+4.16 x B + 2.75 x C + 3.28 x F + 2.91 x H + 2.25 x M + 2.45 x T
+
+Subject to:
+A: 0.6 x B + 0.08 x C + 0.08 x F + 0.4 x H + 0.7 x M + 0.6 x T >= 1
+C: 0.2 x B + 0.00 x C + 0.1 x F + 0.4 x H + 0.3 x M + 0.2 x T >= 1
+B1: 0.1 x B + 0.2 x C + 0.15 x F + 0.35 x H + 0.15 x M + 0.15 x T >= 1
+B2: 0.15 x B + 0.2 x C + 0.10 x F + 0.1 x H + 0.15 x M + 0.10 x T >= 1
+
+Solved in Excel:
+B = 0
+C = 2.5
+F = 0
+H = 0
+M = 3.3
+T = 0
+
+Cost = 14.38
+
+A = 253%
+C = 100%
+B1 = 100%
+B2 = 100%
+
+b. How would you modify the linear program to make it "better"?
+
+In order to improve the linear program, we can remove the constraint on Vitamin A because it is redundant as for most of the meat types, percentage of Vitamin A on each of the food is the highest.
+
+## Exer 4
+
+Solve the gas blending problem introduced in class. That is, determine how much of each type of gas you should buy and what you should use it for. Make sure you can explain the full model and especially the blending constraints.  
+
+Decision Variables:
+How many barrels of raw gasoline type i to (purchase and) use to make fuel type j - Xij
+X11, X12, X13, X21, X22, X23, X31, X32, X33, X41, X42, X43
+How many barrels of raw gasoline type i to (purchase and) resell on the market Yi  
+Y1, Y2, Y3, Y4
+
+Maximize:
+Daily Profit = Revenue - Cost = Total Revenue + Resale Revenue - Total Cost
+45.15 x (X11 + X21 + X31 + X41) + 
+42.95 x (X12 + X22 + X32 + X42) + 
+40.99 x (X13 + X23 + X33 + X43) + 
+36.85 x (Y1 + Y2) + 36.95 x (Y3 + Y4) - 
+31.02 x (X11 + X12 + X13 + Y1) - 
+33.15 x (X21 + X22 + X23 + Y2) - 
+36.35 x (X31 + X32 + X33 + Y3) - 
+38.70 x (X41 + X42 + X43 + Y4)
+
+Subject to:
+Limits on availability of raw gasoline types
+X11 + X12 + X13 + Y1 <= 4000
+X21 + X22 + X23 + Y2 <= 5050
+X31 + X32 + X33 + Y3 <= 7100
+X41 + X42 + X43 + Y4 <= 4300
+X11 + X12 + X13 + Y1 >= 0
+X21 + X22 + X23 + Y2 >= 0
+X31 + X32 + X33 + Y3 >= 0
+X41 + X42 + X43 + Y4 >= 0
+
+Minimum or Maximum demand for fuels
+X11 + X21 + X31 + X41 <= 10000
+X12 + X22 + X32 + X42 <= 999999
+X13 + X23 + X33 + X43 <= 999999
+X11 + X21 + X31 + X41 >= 0
+X12 + X22 + X32 + X42 >= 0
+X13 + X23 + X33 + X43 >= 15000
+
+Minimum octane rating for fuels
+Non-Linear Version - 
+(68 x X11 + 86 x X21 + 91 x X31 + 99 x X41) / (X11 + X21 + X31 + X41) >= 95
+(68 x X12 + 86 x X22 + 91 x X32 + 99 x X42) / (X12 + X22 + X32 + X42) >= 90
+(68 x X13 + 86 x X23 + 91 x X33 + 99 x X43) / (X13 + X23 + X33 + X43) >= 85
+Linear Version - 
+27 x X11 + 9 x X21 + 4 x X31 - 4 x X41 <= 0
+22 x X12 + 4 x X22 - 1 x X32 - 9 x X42 <= 0
+17 x X13 - 1 x X23 - 6 x X33 - 14 x X43 <= 0
+
+Solved in Excel:
+X11 = 0
+X12 = 0
+X13 = 3457
+X21 = 1510
+X22 = 0
+X23 = 3540
+X31 = 0
+X32 = 0
+X33 = 7100
+X41 = 3397
+X42 = 0
+X43 = 903
+
+Y1 = 543
+Y2 = 0
+Y3 = 0
+Y4 = 0
+
+Profit = 140431
+
+## Exer 5
+
+Solve the nurse scheduling problem introduced in class. You want to know the minimum number of nurses needed to cover the 24-hour period. You can assume that the next day is the same as this one.
+
+Decision Variables:
+Number of Nurses Starting Their 8-Hour Shift at Each 4-Hour Slot
+X1, X2, X3, X4, X5, X6
+
+Minimize:
+X1 + X2 + X3 + X4 + X5 + X6
+
+Subject to:
+X6 + X1 >= 4
+X1 + X2 >= 8
+X2 + X3 >= 10
+X3 + X4 >= 7
+X4 + X5 >= 12
+X5 + X6 >= 4
+
+Solved in Excel:
+X1 = 4
+X2 = 4
+X3 = 6
+X4 = 8
+X5 = 4
+X6 = 0
+Number of Nurses = 26
+
+## Exer 6
+
+Cutting Stock Problem.  You need to cut large rolls of 20 foot rolls of paper to meet your orders.
+
+a. Identify the decision variables
+Reference: http://www.math.ubc.ca/~israel/m340/cuttingstock.pdf
+Let’s say there are n possible patterns: for each one we will have a variable Xj, representing
+the number of raw rolls cut according to pattern number j
+
+For sum of width in range [15,20], the following 6 patterns are generated.
+
+Pattern 1 - 5 + 5 + 5 + 5
+Pattern 2 - 5 + 5 + 7
+Pattern 3 - 5 + 5 + 9
+Pattern 4 - 5 + 7 + 7
+Pattern 5 - 7 + 9
+Pattern 6 - 9 + 9
+
+b. Formulate a linear program to solve the problem
+Minimize:
+Total Number of Rolls
+X1 + X2 + X3 + X4 + X5 + X6
+
+Subject To:
+4 x X1 + 2 x X2 + 2 x X3 + 1 x X4 + 0 x X5 + 0 x X6 >= 150
+0 x X1 + 1 x X2 + 0 x X3 + 2 x X4 + 1 x X5 + 0 x X6 >= 200
+0 x X1 + 0 x X2 + 1 x X3 + 0 x X4 + 1 x X5 + 2 x X6 >= 300
+
+c. Solve the linear program and determine the minimum number of 20-foot rolls you need.
+
+Solved in Excel:
+X1 = 12.5
+X2 = 0
+X3 = 0
+X4 = 100
+X5 = 0
+X6 = 150
+
+Since Xi has to be an integer, X1 = 13, and total number of rolls = 13 + 100 + 150 = 263.
