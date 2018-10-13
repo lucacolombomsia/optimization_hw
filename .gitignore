@@ -1,6 +1,7 @@
 HW1/.ipynb_checkpoints/
 HW2/.ipynb_checkpoints/
+HW1/Questions
 .DS_Store
 *.lp
-HW1/Questions
+*.pyc
 *.docx
