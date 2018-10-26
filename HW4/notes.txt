@@ -1,0 +1,9 @@
+Q2
+Yes, it will keep going down, but benefit is likely to be decreasing.
+From the book "The plant-to-warehouse assumptions may need more questioning, however. The validity of these rates depends on filling up the rail cars and trucks running on these lanes. If each plant is shipping to too many warehouses, however, it becomes more difficult to fill railcars and trucks"
+
+Q3
+Not sure I fully understand the question.
+The plant-to-warehouse cost is smaller than the warehouse-to-customer cost, so the model favors solutions that minimize distance between warehouses and customer, not solutions that minimize distance between plant and warehouses.
+
+Q6
